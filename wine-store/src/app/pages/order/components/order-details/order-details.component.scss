@@ -1,0 +1,12 @@
+.order-wrapper {
+	display: grid;
+	grid-template-columns: 50% auto;
+	grid-template-rows: 100%;
+	justify-content: space-evenly;
+}
+
+
+.delivery-form {
+	align-self: center;
+	justify-self: center;
+}

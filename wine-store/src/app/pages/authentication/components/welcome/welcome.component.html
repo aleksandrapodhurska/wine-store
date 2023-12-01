@@ -1,0 +1,22 @@
+<p-card header={{header}} [ngStyle]="screenWidth > 899 && screenWidth < 1140 ? {'width': '220px'} : {'width': '300px'}"
+  styleClass="flex justify-content-center p-card-shadow p-4">
+
+	  <div *ngIf="hasOpenCart">
+		  <div class="p-col-12 p-md-4 mb-4">
+			  You've got an open chart since <span>{{cartDetails.cartCreated | date}}</span> on
+			  <span>{{cartDetails.subtotal | currency:'USD'}}</span>
+			</div>
+			<p-button label="Resume to Shopping" icon="pi pi-angle-double-right" (onClick)="shop()"></p-button>
+		</div>
+		
+		<div *ngIf="!hasOpenCart">
+			<div *ngIf="newUser" class="p-col-12 p-md-4 mb-4">
+				Welcome to your first purchase!
+			</div>
+			<div *ngIf="hasNoOpenCart" class="p-col-12 p-md-4 mb-4">
+				Last purchase was on <span>{{lastOrderDate}}</span>
+			</div>
+			<p-button [label]="buttonValue" icon="pi pi-angle-double-right" (onClick)="shop()"></p-button>
+		</div>
+
+</p-card>

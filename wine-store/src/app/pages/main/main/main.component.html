@@ -1,0 +1,10 @@
+<div *ngIf="!admin">
+	<p-sidebar [(visible)]="_app.display" position="left" [baseZIndex]="10000" [style]="{width:'30em'}">
+		<app-cart></app-cart>
+	</p-sidebar>
+	<app-products></app-products>
+</div>
+
+<div *ngIf="admin">
+	<app-product-form></app-product-form>
+</div>

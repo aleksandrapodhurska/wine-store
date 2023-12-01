@@ -1,0 +1,74 @@
+<p-dialog [(visible)]="display" [style]="{width: '650px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
+	<form [formGroup]="form">
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="name" formControlName="name" required autofocus />
+           
+        </div>
+        <div class="field">
+			<label for="shortDescription">Short Description</label>
+            <input type="text" pInputText id="shortDescription" formControlName="shortDescription" required autofocus />
+            
+        </div>
+        <div class="field">
+            <label for="description">Description</label>
+            <textarea id="description" pInputTextarea formControlName="description" required rows="2" cols="20"></textarea>
+        </div>
+
+        <div class="field">
+            <label class="mb-3">Category</label>
+            <div class="formgrid grid">
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="redWine" name="category" value="White wine" formControlName="category"></p-radioButton>
+                    <label for="redWine">White wine</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="redWine" name="category" value="Red wine" formControlName="category"></p-radioButton>
+                    <label for="redWine">Red wine</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="sparkling" name="category" value="Sparkling" formControlName="category"></p-radioButton>
+                    <label for="sparkling">Sparkling</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="redBlends" name="category" value="Red blends" formControlName="category"></p-radioButton>
+                    <label for="redBlends">Red blends</label>
+                </div>
+                <div class="field-radiobutton col-6">
+                    <p-radioButton id="nonAlcohol" name="category" value="Non-alcohol" formControlName="category"></p-radioButton>
+                    <label for="nonAlcohol">Non-alcohol</label>
+                </div>
+            </div>
+        </div>
+
+		<div class="field">
+            <label for="subcategory">Subcategory</label>
+            <input type="text" pInputText id="subcategory" formControlName="subcategory" required autofocus />
+           
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field col">
+                <label for="unit">Unit</label>
+                <input type="url" pInputText id="unit" formControlName="unit" required autofocus />
+				
+            </div>
+            <div class="field col">
+                <label for="price">Price</label>
+                <p-inputNumber id="price" [required]="true" formControlName="price" mode="currency" currency="USD"  locale="en-US"></p-inputNumber>
+            </div>
+        </div>
+
+		<div class="field">
+			<label for="image">Image</label>
+			<input type="url" pInputText id="image" formControlName="image" required autofocus />
+        </div>
+    
+		<div class="flex justify-content-evenly">
+			<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+			<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" [disabled]="!form.valid" (click)="saveProduct()"></button>
+		</div>
+       
+</form>
+</p-dialog>
+<p-toast></p-toast>

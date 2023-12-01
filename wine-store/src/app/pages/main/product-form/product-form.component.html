@@ -1,0 +1,57 @@
+    <p-table #dt [value]="products" [rows]="10" [paginator]="true" [globalFilterFields]="['name']" [rowHover]="true"
+      dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true">
+      <ng-template pTemplate="caption">
+        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+          (click)="openNew()"></button>
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <h5 class="p-m-0">Manage Products</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..." />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th>Image</th>
+          <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon>
+          </th>
+          <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
+          </th>
+          <th pSortableColumn="subcategory">Subcategory <p-sortIcon field="subcategory"></p-sortIcon>
+          </th>
+          <th>Short Description</th>
+          <th>Description</th>
+          <th style="width: 140px"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>{{product.name}}</td>
+          <td style="justify-content: center;"><img src={{product.image}} [alt]="product.name" width="auto" height="70"
+              class="shadow-4" /></td>
+          <td>{{product.price | currency:'USD'}}</td>
+          <td>{{product.category}}</td>
+          <td>{{product.subcategory}}</td>
+          <td>{{product.shortDescription}}</td>
+          <td>{{product.description}}</td>
+
+          <td style="width: 140px">
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+              (click)="editProduct(product)"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+              (click)="deleteProduct(product)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+    <app-product-dialog></app-product-dialog>
+
+
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    <p-toast></p-toast>

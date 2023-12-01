@@ -1,0 +1,20 @@
+<div class="mb-1">
+	<p-card>
+		<div class="flex justify-content-between">
+			<div>
+				<p-button *ngIf="cartButton && showLogout" type="button" label="Open Cart" (click)="displayCart()" icon="pi pi-shopping-cart"></p-button>
+			</div>
+			<div class="flex align-items-center">
+				<img src="../assets/wine-bottle.png" height="40" class="mr-2">
+				<p>In Vino Veritas</p>
+			</div>
+			<div class="flex align-items-center">
+				<i class="pi pi-phone" style="font-size: 1rem"></i>
+				<p class="ml-1">050-000-00-00</p>
+				<p-button *ngIf="showLogout" label="Logout" icon="pi pi-sign-out" class="ml-4" (onClick)="logout()"></p-button>
+			</div>
+		</div>
+	</p-card>
+</div>
+	
+<router-outlet></router-outlet>

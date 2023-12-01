@@ -1,0 +1,21 @@
+<p-card header="Login" [style]="{width: 'width'}" styleClass="flex justify-content-center max-w-25rem min-w-20rem">
+  <form [formGroup]="form" [ngStyle]="screenWidth > 899 && screenWidth < 1140 ? {'width': '220px'} : {'width': '300px'}">
+    <div class="p-grid p-fluid">
+      <div class="p-col-12 p-md-4 mb-2">
+        <div class="p-float-label">
+          <input id="float-input" id="username" type="text" pInputText
+          formControlName="username">
+          <label for="float-input">Email</label>
+        </div>
+        <div *ngFor="let validation of account_validation_messages.username">
+          <p *ngIf="form.get('username').hasError(validation.type) && (form.get('username').dirty || form.get('username').touched)">{{validation.message}}</p>
+        </div>
+      </div>
+      <div class="p-col-12 p-md-4 mb-2">
+        <p-password placeholder="Password" [feedback]="false" formControlName="password"></p-password>
+      </div>
+    </div>
+    <button pButton type="submit" label="Login" (click)="login()"></button>
+    <p *ngIf="error">{{error}}</p>
+  </form>
+</p-card>

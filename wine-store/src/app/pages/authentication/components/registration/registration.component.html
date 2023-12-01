@@ -1,0 +1,94 @@
+
+<p-card header="Registration" [style]="{width: 'width'}" styleClass="flex justify-content-center max-w-25rem min-w-20rem">
+<form [formGroup]="form" [ngStyle]="screenWidth > 899 && screenWidth < 1140 ? {'width': '220px'} : {'width': '300px'}">
+  <div *ngIf="!permitted">
+  <div class="p-grid p-fluid">
+    <div class="p-col-12 p-md-4 mb-2">
+      <div class="p-float-label">
+        <input id="float-input" type="text" pInputText 
+          formControlName="idCard">
+        <label for="float-input">ID Card</label>
+      </div>
+      <div *ngFor="let validation of account_validation_messages.idCard">
+        <small *ngIf="form.get('idCard').hasError(validation.type) && (form.get('idCard').dirty || form.get('idCard').touched)">{{validation.message}}</small>
+      </div>
+    </div>
+    <div class="p-col-12 p-md-4 mb-2">
+      <div class="p-float-label">
+        <input id="float-input" type="text" pInputText
+          formControlName="username">
+        <label for="float-input">Email</label>
+      </div>
+      <div *ngFor="let validation of account_validation_messages.username">
+        <small *ngIf="form.get('username').hasError(validation.type) && (form.get('username').dirty || form.get('username').touched)">{{validation.message}}</small>
+      </div>
+    </div>
+
+
+    <div formGroupName="matching_passwords" class="p-col-12 p-md-4 mb-2">
+      <div class="p-col-12 p-md-4 mb-2">
+        <p-password matInput formControlName="password" placeholder="Password"  required ></p-password>
+        <div *ngFor="let validation of account_validation_messages.password">
+          <small *ngIf="form.get('matching_passwords').get('password').hasError(validation.type) && (form.get('matching_passwords').get('password').dirty || form.get('matching_passwords').get('password').touched)">{{validation.message}}</small>
+        </div>
+      </div>
+        <div class="p-col-12 p-md-4 mb-2">
+
+       
+        <p-password matInput formControlName="confirm_password" placeholder="Confirm password" required></p-password>
+        <div *ngFor="let validation of account_validation_messages.confirm_password">
+          <small *ngIf="(form.get('matching_passwords').get('confirm_password').hasError(validation.type)|| form.get('matching_passwords').hasError(validation.type)) && (form.get('matching_passwords').get('confirm_password').dirty || form.get('matching_passwords').get('confirm_password').touched)">{{validation.message}}</small>
+        </div>
+      </div>
+   </div>
+  </div>
+  <button pButton type="button" label="Continue" (click)="checkFirstPart()"></button>
+</div>
+  <div *ngIf="permitted">
+
+    <div class="p-grid p-fluid">
+      <div class="p-col-12 p-md-4 mb-2">
+        <div class="p-float-label">
+          <input id="float-input" type="text" pInputText 
+            formControlName="firstName" required autofocus >
+          <label for="float-input">First Name</label>
+        </div>
+      </div>
+      <div class="p-col-12 p-md-4 mb-2">
+        <div class="p-float-label">
+          <input id="float-input" type="text" pInputText 
+            formControlName="familyName" required autofocus >
+          <label for="float-input">Family Name</label>
+        </div>
+      </div>
+      <div class="p-col-12" formGroupName="address">
+
+      
+      <div class="p-col-12 p-md-4 mb-2" >
+        
+        <p-dropdown [options]="groupedCities" placeholder="Select a City" [group]="true" formControlName="city" [required]="true">
+          <ng-template let-group pTemplate="group">
+              <div class="p-d-flex p-ai-center">
+                  <span>{{group.label}}</span>
+              </div>
+          </ng-template>
+      </p-dropdown>
+
+      </div>
+      <div class="p-col-12 p-md-4 mb-2">
+        <div class="p-float-label">
+          <input id="float-input" type="text" pInputText 
+            formControlName="street" required autofocus >
+          <label for="float-input">Street</label>
+        </div>
+      </div>
+      </div>
+    </div>
+      <button pButton type="submit" label="Continue" [disabled]="!form.valid" (click)="onSubmitUserDetails()" ></button>
+      <div class="p-col-12 p-md-4 mb-2">
+        <p *ngIf="error">{{error}}</p>
+        <button *ngIf="error" pButton type="submit" label="Back" (click)="(permitted = false)" ></button>
+      </div>
+</div>
+</form>
+</p-card>

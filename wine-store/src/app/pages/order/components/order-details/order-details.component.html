@@ -1,0 +1,5 @@
+<div class="order-wrapper">
+	<app-order-list></app-order-list>
+	<app-delivery-form class="delivery-form" *ngIf="!success"></app-delivery-form>
+	<app-submitted-order *ngIf="success"></app-submitted-order>
+</div>

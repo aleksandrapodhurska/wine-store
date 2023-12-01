@@ -1,0 +1,24 @@
+.auth-wrapper {
+	width: 100vw;
+	height: 90vh;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	gap: 1rem;
+}
+
+.auth-wrapper > div {
+	width: 31%;
+	height: 100vh;
+}
+
+.smallWrapper > div {
+	width: 100%;
+
+}
+
+.smallWrapper {
+	flex-direction: column;
+	
+}

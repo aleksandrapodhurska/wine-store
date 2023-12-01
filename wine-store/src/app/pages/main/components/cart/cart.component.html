@@ -1,0 +1,62 @@
+<p-toast></p-toast>
+
+<p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+        <p-button label="Clear cart" icon="pi pi-times" iconPos="left" (onClick)="emptyCart()"></p-button>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+        <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" [disabled]="!selectedItem" (click)="deleteProduct(selectedItem)"></button>
+    </ng-template>
+</p-toolbar>
+
+<p-table #dt [value]="cartItems$ | async" responsiveLayout="scroll" styleClass="p-datatable-sm" dataKey="productId._id" [scrollable]="true" scrollHeight="75vh" selectionMode="single" [(selection)]="selectedItem" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            Shopping Cart
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+			<th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cartItem>
+        <tr [pSelectableRow]="cartItem">
+			<td style="justify-content: center;"><img src={{cartItem.productId.image}} [alt]="cartItem.productId.name" width="auto" height="70" class="shadow-4" /></td>
+            <td style="justify-content: center;">{{cartItem.productId.name}}</td>
+            <td style="justify-content: center;">{{cartItem.price | currency:'USD'}}</td>
+            <!-- <td style="justify-content: center;">
+                <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded p-button-text" *ngIf="buttonVisible" (click)="decr()"></button>
+                <span [(ngModel)]="quantityVisible" ngDefaultControl>
+                    {{this.selectedItem ? this.selectedItem.quantity : cartItem.quantity}}
+                </span>
+                <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded  p-button-text" *ngIf="buttonVisible" (click)="incr()"></button>
+            </td>  -->
+            <td pEditableColumn>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input pInputText class="p-inputtext-sm" type="text" [(ngModel)]="cartItem.quantity">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{cartItem.quantity >= 1 ? cartItem.quantity : 1}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+
+            <td style="justify-content: center;">{{cartItem.quantity ? cartItem.quantity * cartItem.price : 1 * cartItem.price}}</td> 
+        </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            <p-button label="Save changes" icon="pi pi-ckeck" iconPos="left" [disabled]="!selectedItem" (onClick)="saveChanges()"></p-button>
+            Subtotal {{ subtotal | currency: 'USD'}}
+			<button pButton type="button" label="Order" (click)="proceedToOrder()"></button>
+        </div>
+    </ng-template>
+</p-table>

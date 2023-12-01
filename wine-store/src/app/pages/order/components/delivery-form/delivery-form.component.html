@@ -1,0 +1,52 @@
+<p-card header="Order details" subheader="subheader" [style]="{width: 'width'}"
+  styleClass="flex justify-content-center w-25rem">
+  <form [formGroup]="form"
+    [ngStyle]="screenWidth > 899 && screenWidth < 1140 ? {'width': '220px'} : {'width': '300px'}">
+    <div class="p-grid p-fluid">
+
+      <div class="p-col-12 p-md-4 mb-2">
+        <p-dropdown [options]="groupedCities" placeholder="Select a City" [group]="true" formControlName="city">
+          <ng-template let-group pTemplate="group">
+            <div class="p-d-flex p-ai-center">
+              <span>{{group.label}}</span>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+      <div class="p-col-12 p-md-4 mb-2">
+        <div class="p-float-label">
+          <input id="float-input" type="text" pInputText formControlName="street">
+          <label for="float-input">Street</label>
+        </div>
+      </div>
+
+      <div class="p-col-12 p-md-4 mb-2">
+        <p-dropdown [options]="dateOptions" placeholder="Select shipping date" [group]="true" formControlName="date"
+          optionDisabled="inactive">
+          <ng-template let-group pTemplate="group">
+            <div class="p-d-flex p-ai-center">
+              <span>{{group.label}}</span>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+      <div class="p-col-12 p-md-4 mb-2">
+        <div class="p-float-label">
+          <input id="float-input" type="text" pInputText formControlName="creditCard">
+          <label for="float-input">Credit Card</label>
+        </div>
+        <div *ngFor="let validation of creditCard_validation_message.creditCard">
+          <small
+            *ngIf="form.get('creditCard').hasError(validation.type) && (form.get('creditCard').dirty || form.get('creditCard').touched)">{{validation.message}}</small>
+        </div>
+      </div>
+    </div>
+
+    <p-button label="Back to shop" icon="pi pi-angle-double-left" iconPos="left" (onClick)="backToShop()" class="mr-2">
+    </p-button>
+    <p-button label="Continue" icon="pi pi-angle-double-right" iconPos="right" [disabled]="!form.valid"
+      (onClick)="createOrder()"></p-button>
+  </form>
+</p-card>

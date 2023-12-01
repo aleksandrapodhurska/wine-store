@@ -1,0 +1,35 @@
+<p-card styleClass="p-card-shadow">
+
+
+<p-table [value]="cart.items" responsiveLayout="scroll" styleClass="p-datatable-sm" dataKey="productId" [scrollable]="true" scrollHeight="70vh">
+    <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+            Shopping Cart
+            <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"></button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+			<th style="justify-content: center;">Image</th>
+            <th style="justify-content: center;">Name</th>
+            <th style="justify-content: center;">Price</th>
+            <th style="justify-content: center;">Quantity</th>
+            <th style="justify-content: center;">Total</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cartItem>
+        <tr>
+			<td style="justify-content: center;"><img src={{cartItem.productId.image}} [alt]="cartItem.productId.name" width="auto" height="70" class="shadow-4" /></td>
+            <td style="justify-content: center;">{{cartItem.productId.name}}</td>
+            <td style="justify-content: center;">{{cartItem.price | currency:'USD'}}</td>
+            <td style="justify-content: center;">{{cartItem.quantity}}</td> 
+            <td style="justify-content: center;">{{cartItem.total}}</td> 
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            Subtotal {{ subtotal | currency: 'USD'}}
+        </div>
+    </ng-template>
+</p-table>
+</p-card>

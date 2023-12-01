@@ -1,0 +1,21 @@
+<div [ngClass]="screenWidth < 900 ? 'smallWrapper' : 'auth-wrapper'">
+  <div>
+    <p-tabView [ngClass]="{'w-20rem': screenWidth > 900, 'max-w-full': screenWidth < 900}">
+      <p-tabPanel header="Login" *ngIf="!loggedIn">
+        <app-login [screenWidth]="screenWidth"></app-login>
+      </p-tabPanel>
+      <p-tabPanel header="Registration" *ngIf="!loggedIn">
+        <app-registration [screenWidth]="screenWidth"></app-registration>
+      </p-tabPanel>
+      <p-tabPanel header="Home" *ngIf="loggedIn">
+        <app-welcome [screenWidth]="screenWidth"></app-welcome>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+  <div>
+    <app-feed></app-feed>
+  </div>
+  <div>
+    <app-statistics></app-statistics>
+  </div>
+</div>
